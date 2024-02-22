@@ -16,18 +16,9 @@ import template from './libraryoptionseditor.template.html';
 
 function populateLanguages(parent) {
     return ApiClient.getCultures().then(languages => {
-        populateLanguagesIntoSelect(parent.querySelector('#selectLanguage'), languages);
+        settingsHelper.populateLanguagesTwoLetterISO(parent.querySelector('#selectLanguage'), languages, false);
         populateLanguagesIntoList(parent.querySelector('.subtitleDownloadLanguages'), languages);
     });
-}
-
-function populateLanguagesIntoSelect(select, languages) {
-    let html = '';
-    html += "<option value=''></option>";
-    for (const culture of languages) {
-        html += `<option value='${culture.TwoLetterISOLanguageName}'>${culture.DisplayName}</option>`;
-    }
-    select.innerHTML = html;
 }
 
 function populateLanguagesIntoList(element, languages) {

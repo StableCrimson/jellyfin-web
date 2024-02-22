@@ -44,7 +44,7 @@ export function populateCountries(select: HTMLSelectElement, countries: CountryI
 }
 
 export default {
-    populateLanguagesTwoLetterISO: populateLanguagesTwoLetterISO,
-    populateLanguagesThreeLetterISO: populateLanguagesThreeLetterISO,
-    populateCountries: populateCountries
+    populateLanguagesTwoLetterISO,
+    populateLanguagesThreeLetterISO,
+    populateCountries
 };
