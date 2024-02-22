@@ -35,7 +35,7 @@ function showDialog(options = { dialogOptions: {}, buttons: [] }) {
     dlg.classList.add('align-items-center');
     dlg.classList.add('justify-content-center');
     const formDialogContent = dlg.querySelector('.formDialogContent');
-    formDialogContent.classList.add('no-grow');
+    formDialogContent?.classList.add('no-grow');
 
     if (enableTvLayout) {
         formDialogContent.style['max-width'] = '50%';
@@ -111,11 +111,7 @@ function showDialog(options = { dialogOptions: {}, buttons: [] }) {
             scrollHelper.centerFocus.off(dlg.querySelector('.formDialogContent'), false);
         }
 
-        if (dialogResult) {
-            return dialogResult;
-        } else {
-            return Promise.reject();
-        }
+        return dialogResult ?? Promise.reject();
     });
 }
 

@@ -611,7 +611,7 @@ class ItemsView {
             posterOptions.lines = lines;
             posterOptions.items = items;
 
-            if (item && item.CollectionType === CollectionType.Folders) {
+            if (item?.CollectionType === CollectionType.Folders) {
                 posterOptions.context = 'folders';
             }
 
@@ -641,7 +641,7 @@ class ItemsView {
         function setTitle(item) {
             LibraryMenu.setTitle(getTitle(item) || '');
 
-            if (item && item.CollectionType === CollectionType.Playlists) {
+            if (item?.CollectionType === CollectionType.Playlists) {
                 hideOrShowAll(view.querySelectorAll('.btnNewItem'), false);
             } else {
                 hideOrShowAll(view.querySelectorAll('.btnNewItem'), true);
@@ -861,45 +861,36 @@ class ItemsView {
                     }
                 });
 
-                if (!isRestored && item && item.Type !== 'PhotoAlbum') {
+                const itemType = item?.Type ?? null;
+
+                if (!isRestored && itemType !== 'PhotoAlbum') {
                     initAlphaPicker();
                 }
 
-                const itemType = item ? item.Type : null;
+                const isNextUp = params.type === 'nextup';
+                const isUserView = itemType === 'UserView';
+                const isProgramsOrChannel = params.type === 'Programs' || itemType === 'Channel';
+                const isMusic = itemType === 'MusicGenre';
+                const isCollectionNotHomeVideos = itemType === 'CollectionFolder' && item?.CollectionType !== CollectionType.Homevideos;
 
-                if ((itemType === 'MusicGenre' || params.type !== 'Programs' && itemType !== 'Channel')
+                const shouldShowPlayButtons = ((isMusic || !isProgramsOrChannel)
                     // Folder, Playlist views
-                    && itemType !== 'UserView'
+                    && !isUserView
                     // Only Photo (homevideos) CollectionFolders are supported
-                    && !(itemType === 'CollectionFolder' && item?.CollectionType !== CollectionType.Homevideos)
-                ) {
-                    // Show Play All buttons
-                    hideOrShowAll(view.querySelectorAll('.btnPlay'), false);
-                } else {
-                    // Hide Play All buttons
-                    hideOrShowAll(view.querySelectorAll('.btnPlay'), true);
-                }
+                    && !isCollectionNotHomeVideos
+                );
+                hideOrShowAll(view.querySelectorAll('.btnPlay'), shouldShowPlayButtons);
 
-                if ((itemType === 'MusicGenre' || params.type !== 'Programs' && params.type !== 'nextup' && itemType !== 'Channel')
+                const shouldShowShuffleButtons = ((isMusic || !isProgramsOrChannel && !isNextUp)
                     // Folder, Playlist views
-                    && itemType !== 'UserView'
+                    && !isUserView
                     // Only Photo (homevideos) CollectionFolders are supported
-                    && !(itemType === 'CollectionFolder' && item?.CollectionType !== CollectionType.Homevideos)
-                ) {
-                    // Show Shuffle buttons
-                    hideOrShowAll(view.querySelectorAll('.btnShuffle'), false);
-                } else {
-                    // Hide Shuffle buttons
-                    hideOrShowAll(view.querySelectorAll('.btnShuffle'), true);
-                }
+                    && !isCollectionNotHomeVideos
+                );
+                hideOrShowAll(view.querySelectorAll('.btnShuffle'), shouldShowShuffleButtons);
 
-                if (item && playbackManager.canQueue(item)) {
-                    // Show Queue button
-                    hideOrShowAll(view.querySelectorAll('.btnQueue'), false);
-                } else {
-                    // Hide Queue button
-                    hideOrShowAll(view.querySelectorAll('.btnQueue'), true);
-                }
+                const shouldShowQueueButtons = item && playbackManager.canQueue(item);
+                hideOrShowAll(view.querySelectorAll('.btnQueue'), shouldShowQueueButtons);
             });
 
             if (!isRestored) {
@@ -1200,7 +1191,7 @@ class ItemsView {
             showTitle = false;
         } else if (params.type === 'Programs' || params.type === 'Recordings' || params.type === 'Person' || params.type === 'nextup' || params.type === 'Audio' || params.type === 'MusicAlbum' || params.type === 'MusicArtist') {
             showTitle = true;
-        } else if (item && item.Type !== 'PhotoAlbum') {
+        } else if (item?.Type !== 'PhotoAlbum') {
             showTitle = true;
         }
 
