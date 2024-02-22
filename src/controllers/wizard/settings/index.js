@@ -3,7 +3,7 @@ import '../../../elements/emby-checkbox/emby-checkbox';
 import '../../../elements/emby-button/emby-button';
 import '../../../elements/emby-select/emby-select';
 import Dashboard from '../../../utils/dashboard';
-import { populateCountries, populateLanguagesTwoLetterISO } from 'components/settingshelper';
+import { populateCountries, populateLanguagesTwoLetterISO } from 'components/settingsHelper';
 
 function save(page) {
     loading.show();

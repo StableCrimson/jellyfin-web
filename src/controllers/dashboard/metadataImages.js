@@ -6,7 +6,7 @@ import loading from '../../components/loading/loading';
 import libraryMenu from '../../scripts/libraryMenu';
 import globalize from '../../scripts/globalize';
 import Dashboard from '../../utils/dashboard';
-import settingsHelper from 'components/settingshelper';
+import settingsHelper from 'components/settingsHelper';
 
 import '../../components/listview/listview.scss';
 

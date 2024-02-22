@@ -1,5 +1,5 @@
 import appSettings from '../../scripts/settings/appSettings';
-import { populateLanguagesThreeLetterISO } from 'components/settingshelper';
+import { populateLanguagesThreeLetterISO } from 'components/settingsHelper';
 import { appHost } from '../apphost';
 import focusManager from '../focusManager';
 import qualityoptions from '../qualityOptions';

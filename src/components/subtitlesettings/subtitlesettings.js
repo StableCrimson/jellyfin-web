@@ -5,7 +5,7 @@ import focusManager from '../focusManager';
 import layoutManager from '../layoutManager';
 import loading from '../loading/loading';
 import subtitleAppearanceHelper from './subtitleappearancehelper';
-import settingsHelper from '../settingshelper';
+import settingsHelper from '../settingsHelper';
 import dom from '../../scripts/dom';
 import Events from '../../utils/events.ts';
 import '../listview/listview.scss';

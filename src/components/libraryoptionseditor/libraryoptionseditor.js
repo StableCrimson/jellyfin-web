@@ -7,7 +7,7 @@
 import escapeHtml from 'escape-html';
 import globalize from '../../scripts/globalize';
 import dom from '../../scripts/dom';
-import settingsHelper from 'components/settingshelper';
+import settingsHelper from 'components/settingsHelper';
 import '../../elements/emby-checkbox/emby-checkbox';
 import '../../elements/emby-select/emby-select';
 import '../../elements/emby-input/emby-input';

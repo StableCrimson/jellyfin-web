@@ -22,7 +22,7 @@ import ServerConnections from '../ServerConnections';
 import toast from '../toast/toast';
 import { appRouter } from '../router/appRouter';
 import template from './metadataEditor.template.html';
-import { populateCountries, populateLanguagesTwoLetterISO } from 'components/settingshelper';
+import { populateCountries, populateLanguagesTwoLetterISO } from 'components/settingsHelper';
 
 let currentContext;
 let metadataEditorInfo;

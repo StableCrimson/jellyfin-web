@@ -1,26 +1,12 @@
 import globalize from '../scripts/globalize';
+import { CountryInfo, CultureDto } from '@jellyfin/sdk/lib/generated-client';
 
 /**
  * Helper for handling settings.
  * @module components/settingsHelper
  */
 
-type Language = {
-    Name?: string,
-    DisplayName?: string,
-    TwoLetterISOLanguageName?: string,
-    ThreeLetterISOLanguageName?: string,
-    ThreeLetterISOLanguageNames?: string[]
-};
-
-type Country = {
-    Name?: string,
-    DisplayName?: string,
-    TwoLetterISORegionName?: string,
-    ThreeLetterISORegionName?: string,
-};
-
-export function populateLanguagesThreeLetterISO(select: HTMLElement, languages: Language[], includeAny: boolean) {
+export function populateLanguagesThreeLetterISO(select: HTMLElement, languages: CultureDto[], includeAny: boolean) {
     let html = "<option value=''></option>";
 
     if (includeAny) {
@@ -34,7 +20,7 @@ export function populateLanguagesThreeLetterISO(select: HTMLElement, languages: 
     select.innerHTML = html;
 }
 
-export function populateLanguagesTwoLetterISO(select: HTMLSelectElement, languages: Language[], includeAny: boolean) {
+export function populateLanguagesTwoLetterISO(select: HTMLSelectElement, languages: CultureDto[], includeAny: boolean) {
     let html = "<option value=''></option>";
 
     if (includeAny) {
@@ -48,7 +34,7 @@ export function populateLanguagesTwoLetterISO(select: HTMLSelectElement, languag
     select.innerHTML = html;
 }
 
-export function populateCountries(select: HTMLSelectElement, countries: Country[]) {
+export function populateCountries(select: HTMLSelectElement, countries: CountryInfo[]) {
     let html = "<option value=''></option>";
     for (const country of countries) {
         html += `<option value='${country.TwoLetterISORegionName}'>${country.DisplayName}</option>`;
