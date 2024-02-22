@@ -1783,7 +1783,7 @@ function renderCast(page, item) {
     page.querySelector('#castCollapsible').classList.remove('hide');
     const castContent = page.querySelector('#castContent');
 
-    import('../../components/cardbuilder/peoplecardbuilder').then(({ default: peoplecardbuilder }) => {
+    import('../../components/cardbuilder/peopleCardBuilder').then(({ default: peoplecardbuilder }) => {
         peoplecardbuilder.buildPeopleCards(people, {
             itemsContainer: castContent,
             coverImage: true,
@@ -1805,7 +1805,7 @@ function renderGuestCast(page, item) {
     page.querySelector('#guestCastCollapsible').classList.remove('hide');
     const guestCastContent = page.querySelector('#guestCastContent');
 
-    import('../../components/cardbuilder/peoplecardbuilder').then(({ default: peoplecardbuilder }) => {
+    import('../../components/cardbuilder/peopleCardBuilder').then(({ default: peoplecardbuilder }) => {
         peoplecardbuilder.buildPeopleCards(people, {
             itemsContainer: guestCastContent,
             coverImage: true,
