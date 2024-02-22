@@ -3,6 +3,7 @@ import '../../../elements/emby-checkbox/emby-checkbox';
 import '../../../elements/emby-button/emby-button';
 import '../../../elements/emby-select/emby-select';
 import Dashboard from '../../../utils/dashboard';
+import { populateCountries, populateLanguagesTwoLetterISO } from 'components/settingshelper';
 
 function save(page) {
     loading.show();
@@ -22,32 +23,8 @@ function save(page) {
     });
 }
 
-function populateLanguages(select, languages) {
-    let html = '';
-    html += "<option value=''></option>";
-
-    for (let i = 0, length = languages.length; i < length; i++) {
-        const culture = languages[i];
-        html += "<option value='" + culture.TwoLetterISOLanguageName + "'>" + culture.DisplayName + '</option>';
-    }
-
-    select.innerHTML = html;
-}
-
-function populateCountries(select, allCountries) {
-    let html = '';
-    html += "<option value=''></option>";
-
-    for (let i = 0, length = allCountries.length; i < length; i++) {
-        const culture = allCountries[i];
-        html += "<option value='" + culture.TwoLetterISORegionName + "'>" + culture.DisplayName + '</option>';
-    }
-
-    select.innerHTML = html;
-}
-
 function reloadData(page, config, cultures, countries) {
-    populateLanguages(page.querySelector('#selectLanguage'), cultures);
+    populateLanguagesTwoLetterISO(page.querySelector('#selectLanguage'), cultures, false);
     populateCountries(page.querySelector('#selectCountry'), countries);
     page.querySelector('#selectLanguage').value = config.PreferredMetadataLanguage;
     page.querySelector('#selectCountry').value = config.MetadataCountryCode;

@@ -22,6 +22,7 @@ import ServerConnections from '../ServerConnections';
 import toast from '../toast/toast';
 import { appRouter } from '../router/appRouter';
 import template from './metadataEditor.template.html';
+import { populateCountries, populateLanguagesTwoLetterISO } from 'components/settingshelper';
 
 let currentContext;
 let metadataEditorInfo;
@@ -385,34 +386,6 @@ function getEditorConfig(itemId, serverId) {
     }
 
     return Promise.resolve({});
-}
-
-function populateCountries(select, allCountries) {
-    let html = '';
-
-    html += "<option value=''></option>";
-
-    for (let i = 0, length = allCountries.length; i < length; i++) {
-        const culture = allCountries[i];
-
-        html += "<option value='" + culture.TwoLetterISORegionName + "'>" + culture.DisplayName + '</option>';
-    }
-
-    select.innerHTML = html;
-}
-
-function populateLanguages(select, languages) {
-    let html = '';
-
-    html += "<option value=''></option>";
-
-    for (let i = 0, length = languages.length; i < length; i++) {
-        const culture = languages[i];
-
-        html += "<option value='" + culture.TwoLetterISOLanguageName + "'>" + culture.DisplayName + '</option>';
-    }
-
-    select.innerHTML = html;
 }
 
 function renderContentTypeOptions(context, metadataInfo) {
@@ -1015,7 +988,7 @@ function reload(context, itemId, serverId) {
 
         loadExternalIds(context, item, metadataEditorInfo.ExternalIdInfos);
 
-        populateLanguages(context.querySelector('#selectLanguage'), languages);
+        populateLanguagesTwoLetterISO(context.querySelector('#selectLanguage'), languages, false);
         populateCountries(context.querySelector('#selectCountry'), countries);
 
         setFieldVisibilities(context, item);

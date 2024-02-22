@@ -1,4 +1,5 @@
 import appSettings from '../../scripts/settings/appSettings';
+import { populateLanguagesThreeLetterISO } from 'components/settingshelper';
 import { appHost } from '../apphost';
 import focusManager from '../focusManager';
 import qualityoptions from '../qualityOptions';
@@ -23,20 +24,6 @@ function fillSkipLengths(select) {
     }).map(o => {
         return `<option value="${o.value}">${o.name}</option>`;
     }).join('');
-}
-
-function populateLanguages(select, languages) {
-    let html = '';
-
-    html += `<option value=''>${globalize.translate('AnyLanguage')}</option>`;
-
-    for (let i = 0, length = languages.length; i < length; i++) {
-        const culture = languages[i];
-
-        html += `<option value='${culture.ThreeLetterISOLanguageName}'>${culture.DisplayName}</option>`;
-    }
-
-    select.innerHTML = html;
 }
 
 function fillQuality(select, isInNetwork, mediatype, maxVideoWidth) {
@@ -146,7 +133,7 @@ function loadForm(context, user, userSettings, systemInfo, apiClient) {
     context.querySelector('#selectAllowedAudioChannels').value = userSettings.allowedAudioChannels();
 
     apiClient.getCultures().then(allCultures => {
-        populateLanguages(context.querySelector('#selectAudioLanguage'), allCultures);
+        populateLanguagesThreeLetterISO(context.querySelector('#selectAudioLanguage'), allCultures, true);
 
         context.querySelector('#selectAudioLanguage', context).value = user.Configuration.AudioLanguagePreference || '';
         context.querySelector('.chkEpisodeAutoPlay').checked = user.Configuration.EnableNextEpisodeAutoPlay || false;

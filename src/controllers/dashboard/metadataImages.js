@@ -6,6 +6,7 @@ import loading from '../../components/loading/loading';
 import libraryMenu from '../../scripts/libraryMenu';
 import globalize from '../../scripts/globalize';
 import Dashboard from '../../utils/dashboard';
+import settingsHelper from 'components/settingshelper';
 
 import '../../components/listview/listview.scss';
 
@@ -32,25 +33,13 @@ function populateImageResolutionOptions(select) {
 
 function populateLanguages(select) {
     return ApiClient.getCultures().then(function(languages) {
-        let html = '';
-        html += "<option value=''></option>";
-        for (let i = 0, length = languages.length; i < length; i++) {
-            const culture = languages[i];
-            html += "<option value='" + culture.TwoLetterISOLanguageName + "'>" + culture.DisplayName + '</option>';
-        }
-        select.innerHTML = html;
+        settingsHelper.populateLanguagesTwoLetterISO(select, languages, false);
     });
 }
 
 function populateCountries(select) {
     return ApiClient.getCountries().then(function(allCountries) {
-        let html = '';
-        html += "<option value=''></option>";
-        for (let i = 0, length = allCountries.length; i < length; i++) {
-            const culture = allCountries[i];
-            html += "<option value='" + culture.TwoLetterISORegionName + "'>" + culture.DisplayName + '</option>';
-        }
-        select.innerHTML = html;
+        settingsHelper.populateCountries(select, allCountries);
     });
 }
 

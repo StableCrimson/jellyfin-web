@@ -7,6 +7,7 @@
 import escapeHtml from 'escape-html';
 import globalize from '../../scripts/globalize';
 import dom from '../../scripts/dom';
+import settingsHelper from 'components/settingshelper';
 import '../../elements/emby-checkbox/emby-checkbox';
 import '../../elements/emby-select/emby-select';
 import '../../elements/emby-input/emby-input';
@@ -39,12 +40,7 @@ function populateLanguagesIntoList(element, languages) {
 
 function populateCountries(select) {
     return ApiClient.getCountries().then(allCountries => {
-        let html = '';
-        html += "<option value=''></option>";
-        for (const culture of allCountries) {
-            html += `<option value='${culture.TwoLetterISORegionName}'>${culture.DisplayName}</option>`;
-        }
-        select.innerHTML = html;
+        settingsHelper.populateCountries(select, allCountries);
     });
 }
 
